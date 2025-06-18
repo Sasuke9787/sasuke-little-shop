@@ -5,104 +5,99 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Sasuke Little Shop</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
   body {
-    margin: 0; padding: 2rem 1rem;
-    font-family: 'Montserrat', Arial, sans-serif;
-    background: #121212;
-    color: #e0e0e0;
+    margin: 0; padding: 1rem;
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #eee;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    align-items: center;
   }
   header {
-    font-size: 2.5rem;
-    font-weight: 900;
-    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
     color: #00bcd4;
-    text-shadow: 0 0 6px #00bcd4;
   }
   form {
-    background: #1e1e1e;
-    border-radius: 12px;
-    padding: 2rem;
-    width: 100%;
-    max-width: 520px;
-    box-shadow: 0 4px 12px rgba(0,188,212,0.4);
-    display: flex;
-    flex-direction: column;
+    background-color: #1f1f1f;
+    border-radius: 8px;
+    padding: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
   }
   label {
-    font-weight: 700;
-    margin-top: 1.3rem;
-    color: #80deea;
+    display: block;
+    margin-top: 1rem;
+    font-weight: bold;
   }
-  input, select, textarea, button {
-    margin-top: 0.4rem;
-    border-radius: 8px;
+  select, input[type="number"], input[type="text"], textarea, button {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.3rem;
+    border-radius: 5px;
     border: none;
-    background: #2b2b2b;
+    background-color: #2c2c2c;
     color: #eee;
-    font-size: 1.1rem;
-    padding: 0.65rem 1rem;
+    font-size: 1rem;
     box-sizing: border-box;
-    transition: background 0.25s ease;
-  }
-  input:focus, select:focus, textarea:focus {
-    outline: none;
-    background: #004d40;
-    box-shadow: 0 0 5px #00bcd4;
-    color: #a7ffeb;
   }
   textarea {
     resize: vertical;
-    min-height: 80px;
   }
   button {
-    margin-top: 2rem;
-    background: #00bcd4;
-    font-weight: 900;
-    cursor: pointer;
+    background-color: #00bcd4;
     color: #000;
-    font-size: 1.3rem;
-    letter-spacing: 0.05em;
-    box-shadow: 0 5px 15px #00bcd4aa;
-    transition: background 0.3s ease;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: background-color 0.3s ease;
   }
-  button:hover:not(:disabled) {
-    background: #0097a7;
-    box-shadow: 0 8px 20px #0097a7cc;
-  }
-  button:disabled {
-    background: #555;
-    cursor: not-allowed;
-    box-shadow: none;
+  button:hover {
+    background-color: #0097a7;
   }
   #pedidoExibido {
-    max-width: 520px;
-    background: #212121;
-    color: #00e676;
+    max-width: 600px;
+    background-color: #292929;
+    color: #0f0;
     white-space: pre-wrap;
-    padding: 1.5rem;
-    border-radius: 12px;
-    margin: 2rem auto 0 auto;
-    font-family: 'Courier New', Courier, monospace;
-    min-height: 7rem;
-    box-shadow: 0 0 10px #00e676aa;
-    user-select: text;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem auto 0 auto;
+    font-family: monospace;
+    min-height: 6rem;
   }
   footer {
-    margin-top: auto;
-    padding: 1.3rem 1rem;
-    font-size: 0.95rem;
     text-align: center;
+    margin-top: auto;
+    padding: 1rem;
+    font-size: 0.9rem;
     color: #999;
-    max-width: 520px;
   }
-  optgroup {
-    color: #00bcd4;
-    font-weight: 700;
+  .item-group {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  .item-group > * {
+    flex: 1;
+  }
+  #itensContainer {
+    margin-top: 0.5rem;
+  }
+  .remover-btn {
+    background-color: #b71c1c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 0 0.5rem;
+    font-weight: bold;
+  }
+  .remover-btn:hover {
+    background-color: #7f0000;
   }
 </style>
 </head>
@@ -110,96 +105,18 @@
 
 <header>Sasuke Little Shop</header>
 
-<form id="pedidoForm" autocomplete="off">
+<form id="pedidoForm">
   <label for="nome">Seu Nome:</label>
-  <input type="text" id="nome" name="nome" required autocomplete="off" />
+  <input type="text" id="nome" name="nome" required />
 
   <label for="idJogo">ID no Jogo:</label>
-  <input type="text" id="idJogo" name="idJogo" required autocomplete="off" />
+  <input type="text" id="idJogo" name="idJogo" required />
 
-  <label for="itemDesejado">Item Desejado:</label>
-  <select id="itemSelect" name="itemDesejado" required>
-    <option value="" disabled selected>Selecione um item</option>
-
-    <optgroup label="Raras">
-      <option value="Valkyria Rara" data-preco="599.99">Valkyria Rara — R$599,99</option>
-      <option value="GZ" data-preco="324.99">GZ — R$324,99</option>
-      <option value="Frost RR" data-preco="199.99">Frost RR — R$199,99</option>
-      <option value="Gula RR" data-preco="164.99">Gula RR — R$164,99</option>
-      <option value="Hermes RR" data-preco="189.99">Hermes RR — R$189,99</option>
-      <option value="Lança RR" data-preco="129.99">Lança RR — R$129,99</option>
-      <option value="Hades RR" data-preco="129.99">Hades RR — R$129,99</option>
-      <option value="Hephaestus RR" data-preco="114.99">Hephaestus RR — R$114,99</option>
-      <option value="Helheim RR" data-preco="114.99">Helheim RR — R$114,99</option>
-      <option value="Fenrir RR" data-preco="99.99">Fenrir RR — R$99,99</option>
-      <option value="Título Helheim" data-preco="199.99">Título Helheim — R$199,99</option>
-      <option value="Título Frost" data-preco="94.99">Título Frost — R$94,99</option>
-      <option value="Título Fenrir" data-preco="84.99">Título Fenrir — R$84,99</option>
-      <option value="Título Zeus" data-preco="32.49">Título Zeus — R$32,49</option>
-    </optgroup>
-
-    <optgroup label="Full Sets">
-      <option value="Full FENRIR 4/4" data-preco="34.99">Full FENRIR 4/4 — R$34,99</option>
-      <option value="Full FENRIR 5/5" data-preco="49.99">Full FENRIR 5/5 — R$49,99</option>
-      <option value="Full Hermes 4/5" data-preco="44.99">Full Hermes 4/5 — R$44,99</option>
-      <option value="Full Hermes 5/5" data-preco="59.99">Full Hermes 5/5 — R$59,99</option>
-      <option value="Full Ares 4/4" data-preco="34.99">Full Ares 4/4 — R$34,99</option>
-      <option value="Full Ares 5/5" data-preco="49.99">Full Ares 5/5 — R$49,99</option>
-      <option value="Full Permafrost 4/4" data-preco="29.99">Full Permafrost 4/4 — R$29,99</option>
-      <option value="Full Permafrost 5/5" data-preco="39.99">Full Permafrost 5/5 — R$39,99</option>
-      <option value="Full Jormugandr 5/5" data-preco="37.49">Full Jormugandr 5/5 — R$37,49</option>
-      <option value="Full Jormugandr 4/4" data-preco="24.99">Full Jormugandr 4/4 — R$24,99</option>
-      <option value="Full Pós 5/5" data-preco="37.49">Full Pós 5/5 — R$37,49</option>
-      <option value="Full Pós 4/4" data-preco="24.99">Full Pós 4/4 — R$24,99</option>
-      <option value="Full Zeus 4/4" data-preco="19.99">Full Zeus 4/4 — R$19,99</option>
-      <option value="Full Zeus 5/5" data-preco="29.99">Full Zeus 5/5 — R$29,99</option>
-      <option value="Full Thor 5/5" data-preco="29.99">Full Thor 5/5 — R$29,99</option>
-      <option value="Full Thor 4/4" data-preco="19.99">Full Thor 4/4 — R$19,99</option>
-      <option value="Full Apollo 5/5" data-preco="29.99">Full Apollo 5/5 — R$29,99</option>
-      <option value="Full Apollo 4/4" data-preco="19.99">Full Apollo 4/4 — R$19,99</option>
-    </optgroup>
-
-    <optgroup label="Espadas e Armas">
-      <option value="Espada Valkyria" data-preco="69.99">Espada Valkyria — R$69,99</option>
-      <option value="Mjolnir" data-preco="44.99">Mjolnir — R$44,99</option>
-      <option value="BZ" data-preco="27.49">BZ — R$27,49</option>
-      <option value="Espada Apollo" data-preco="29.99">Espada Apollo — R$29,99</option>
-      <option value="Espada Permafrost" data-preco="25.99">Espada Permafrost — R$25,99</option>
-      <option value="Espada Hermes" data-preco="24.99">Espada Hermes — R$24,99</option>
-      <option value="Espada Gula" data-preco="24.99">Espada Gula — R$24,99</option>
-      <option value="Espada Orgulho" data-preco="24.99">Espada Orgulho — R$24,99</option>
-      <option value="Espada Jormugandr" data-preco="21.99">Espada Jormugandr — R$21,99</option>
-      <option value="Espada Helheim" data-preco="21.99">Espada Helheim — R$21,99</option>
-      <option value="Espada Hades" data-preco="20.99">Espada Hades — R$20,99</option>
-      <option value="Lança Ares" data-preco="20.99">Lança Ares — R$20,99</option>
-      <option value="Espada Fenrir" data-preco="17.99">Espada Fenrir — R$17,99</option>
-      <option value="Tridente Não Selado" data-preco="17.99">Tridente Não Selado — R$17,99</option>
-      <option value="Tridente Antigo" data-preco="9.99">Tridente Antigo — R$9,99</option>
-    </optgroup>
-
-    <optgroup label="Mvps baratos e clássicos">
-      <option value="Freya Antiga" data-preco="12.99">Freya Antiga — R$12,99</option>
-      <option value="Freya Oceano" data-preco="8.99">Freya Oceano — R$8,99</option>
-      <option value="Freya Natal" data-preco="9.99">Freya Natal — R$9,99</option>
-      <option value="Foice Azul" data-preco="9.99">Foice Azul — R$9,99</option>
-      <option value="Foice" data-preco="8.99">Foice — R$8,99</option>
-      <option value="GAT FC" data-preco="9.99">GAT FC — R$9,99</option>
-      <option value="GAT Sombra" data-preco="9.99">GAT Sombra — R$9,99</option>
-      <option value="GAT Gold" data-preco="6.99">GAT Gold — R$6,99</option>
-      <option value="GAT 2020" data-preco="6.99">GAT 2020 — R$6,99</option>
-      <option value="Cross" data-preco="5.99">Cross — R$5,99</option>
-      <option value="Escudo S11" data-preco="3.49">Escudo S11 — R$3,49</option>
-      <option value="Escudo Oceano" data-preco="2.99">Escudo Oceano — R$2,99</option>
-      <option value="Escudo Ares" data-preco="2.99">Escudo Ares — R$2,99</option>
-      <option value="Escudo S2" data-preco="2.75">Escudo S2 — R$2,75</option>
-      <option value="BB" data-preco="2.75">BB — R$2,75</option>
-      <option value="DW" data-preco="2.49">DW — R$2,49</option>
-    </optgroup>
-
-    <optgroup label="Coins">
-      <option value="Coins - 10m" data-preco="1.00">Coins - 10m — R$1,00</option>
-    </optgroup>
-  </select>
+  <label>Itens Desejados:</label>
+  <div id="itensContainer">
+    <!-- Itens vão aparecer aqui -->
+  </div>
+  <button type="button" id="adicionarItemBtn">+ Adicionar Item</button>
 
   <label for="pagamento">Forma de Pagamento:</label>
   <select id="pagamento" name="pagamento" required>
@@ -208,7 +125,11 @@
   </select>
 
   <label for="mensagem">Mensagem adicional (opcional):</label>
-  <textarea id="mensagem" name="mensagem" rows="3" placeholder="Ex: Pode me entregar as 15:00?"></textarea>
+  <textarea id="mensagem" name="mensagem" rows="3" placeholder="Ex: Meu ID no jogo é 123456"></textarea>
+
+  <div style="margin-top:1rem; font-weight:bold; font-size:1.2rem; color:#00bcd4;">
+    Total: R$ <span id="totalPedido">0.00</span>
+  </div>
 
   <button type="submit">Enviar Pedido</button>
 </form>
@@ -216,67 +137,254 @@
 <div id="pedidoExibido" aria-live="polite"></div>
 
 <footer>
-  Entrega só é feita após confirmação do pagamento.<br />
-  Contato via Discord: adicione <strong>sasuke9787</strong> para falar sobre seu pedido se quiser.<br />
-  A entrega é feita por: Sasuke_Uchiha878
+  Entrega só é feita após confirmação do pagamento. <br />
+  Contato via Discord: adicione <strong>sasuke9787</strong> para finalizar seu pedido.
 </footer>
 
 <script>
   const webhookUrl = "https://discord.com/api/webhooks/1384991383315808336/DDj7x3DrLUyv8Hl9dvAO0l6034tOGcRa0HmGrco-u5NQlCA4-52QWFFLZL5mC3xkv0P0";
-  const form = document.getElementById("pedidoForm");
-  const button = form.querySelector("button");
-  const pedidoExibido = document.getElementById("pedidoExibido");
 
-  form.addEventListener("submit", async (event) => {
+  // Lista dos itens com nome e preço
+  const itensDisponiveis = [
+    { grupo: "Raras", itens: [
+      { nome: "Valkyria Rara", preco: 599.99 },
+      { nome: "GZ", preco: 324.99 },
+      { nome: "Frost RR", preco: 199.99 },
+      { nome: "Gula RR", preco: 164.99 },
+      { nome: "Hermes RR", preco: 189.99 },
+      { nome: "Lança RR", preco: 129.99 },
+      { nome: "Hades RR", preco: 129.99 },
+      { nome: "Hephaestus RR", preco: 114.99 },
+      { nome: "Helheim RR", preco: 114.99 },
+      { nome: "Fenrir RR", preco: 99.99 },
+      { nome: "Título Helheim", preco: 199.99 },
+      { nome: "Título Frost", preco: 94.99 },
+      { nome: "Título Fenrir", preco: 84.99 },
+      { nome: "Título Zeus", preco: 32.49 }
+    ]},
+    { grupo: "Full Sets", itens: [
+      { nome: "Full FENRIR 4/4", preco: 34.99 },
+      { nome: "Full FENRIR 5/5", preco: 49.99 },
+      { nome: "Full Hermes 4/5", preco: 44.99 },
+      { nome: "Full Hermes 5/5", preco: 59.99 },
+      { nome: "Full Ares 4/4", preco: 34.99 },
+      { nome: "Full Ares 5/5", preco: 49.99 },
+      { nome: "Full Permafrost 4/4", preco: 29.99 },
+      { nome: "Full Permafrost 5/5", preco: 39.99 },
+      { nome: "Full Jormugandr 5/5", preco: 37.49 },
+      { nome: "Full Jormugandr 4/4", preco: 24.99 },
+      { nome: "Full Pós 5/5", preco: 37.49 },
+      { nome: "Full Pós 4/4", preco: 24.99 },
+      { nome: "Full Zeus 4/4", preco: 19.99 },
+      { nome: "Full Zeus 5/5", preco: 29.99 },
+      { nome: "Full Thor 5/5", preco: 29.99 },
+      { nome: "Full Thor 4/4", preco: 19.99 },
+      { nome: "Full Apollo 5/5", preco: 29.99 },
+      { nome: "Full Apollo 4/4", preco: 19.99 }
+    ]},
+    { grupo: "Espadas e Armas", itens: [
+      { nome: "Espada Valkyria", preco: 69.99 },
+      { nome: "Mjolnir", preco: 44.99 },
+      { nome: "BZ", preco: 27.49 },
+      { nome: "Espada Apollo", preco: 29.99 },
+      { nome: "Espada Permafrost", preco: 25.99 },
+      { nome: "Espada Hermes", preco: 24.99 },
+      { nome: "Espada Gula", preco: 24.99 },
+      { nome: "Espada Orgulho", preco: 24.99 },
+      { nome: "Espada Jormugandr", preco: 21.99 },
+      { nome: "Espada Helheim", preco: 21.99 },
+      { nome: "Espada Hades", preco: 20.99 },
+      { nome: "Lança Ares", preco: 20.99 },
+      { nome: "Espada Fenrir", preco: 17.99 },
+      { nome: "Tridente Não Selado", preco: 17.99 },
+      { nome: "Tridente Antigo", preco: 9.99 }
+    ]},
+    { grupo: "Mvps baratos e clássicos", itens: [
+      { nome: "Freya Antiga", preco: 12.99 },
+      { nome: "Freya Oceano", preco: 8.99 },
+      { nome: "Freya Natal", preco: 9.99 },
+      { nome: "Foice Azul", preco: 9.99 },
+      { nome: "Foice", preco: 8.99 },
+      { nome: "GAT FC", preco: 9.99 },
+      { nome: "GAT Sombra", preco: 9.99 },
+      { nome: "GAT Gold", preco: 6.99 },
+      { nome: "GAT 2020", preco: 6.99 },
+      { nome: "Cross", preco: 5.99 },
+      { nome: "Escudo S11", preco: 3.49 },
+      { nome: "Escudo Oceano", preco: 2.99 },
+      { nome: "Escudo Ares", preco: 2.99 },
+      { nome: "Escudo S2", preco: 2.75 },
+      { nome: "BB", preco: 2.75 },
+      { nome: "DW", preco: 2.49 }
+    ]},
+    { grupo: "Coins", itens: [
+      { nome: "Coins - 10m", preco: 1.00 }
+    ]}
+  ];
+
+  const itensContainer = document.getElementById("itensContainer");
+  const adicionarItemBtn = document.getElementById("adicionarItemBtn");
+  const totalPedidoSpan = document.getElementById("totalPedido");
+
+  // Função para criar o select de itens
+  function criarSelectItem() {
+    const select = document.createElement("select");
+    select.required = true;
+    const placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = "Selecione um item";
+    placeholder.disabled = true;
+    placeholder.selected = true;
+    select.appendChild(placeholder);
+
+    itensDisponiveis.forEach(grupo => {
+      const optgroup = document.createElement("optgroup");
+      optgroup.label = grupo.grupo;
+      grupo.itens.forEach(item => {
+        const option = document.createElement("option");
+        option.value = item.nome;
+        option.dataset.preco = item.preco;
+        option.textContent = `${item.nome} — R$${item.preco.toFixed(2)}`;
+        optgroup.appendChild(option);
+      });
+      select.appendChild(optgroup);
+    });
+    return select;
+  }
+
+  // Função para criar campo de quantidade
+  function criarInputQuantidade() {
+    const input = document.createElement("input");
+    input.type = "number";
+    input.min = "1";
+    input.value = "1";
+    input.required = true;
+    input.style.maxWidth = "80px";
+    input.title = "Quantidade";
+    return input;
+  }
+
+  // Função para criar botão remover item
+  function criarBotaoRemover() {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.textContent = "X";
+    btn.className = "remover-btn";
+    btn.title = "Remover item";
+    btn.addEventListener("click", () => {
+      btn.parentElement.remove();
+      calcularTotal();
+    });
+    return btn;
+  }
+
+  // Função para adicionar um novo grupo de item + quantidade
+  function adicionarItem() {
+    const div = document.createElement("div");
+    div.className = "item-group";
+
+    const select = criarSelectItem();
+    const quantidade = criarInputQuantidade();
+    const btnRemover = criarBotaoRemover();
+
+    select.addEventListener("change", calcularTotal);
+    quantidade.addEventListener("input", calcularTotal);
+
+    div.appendChild(select);
+    div.appendChild(quantidade);
+    div.appendChild(btnRemover);
+
+    itensContainer.appendChild(div);
+
+    calcularTotal();
+  }
+
+  // Função para calcular o total
+  function calcularTotal() {
+    let total = 0;
+    const grupos = itensContainer.querySelectorAll(".item-group");
+    grupos.forEach(grupo => {
+      const select = grupo.querySelector("select");
+      const quantidade = grupo.querySelector("input[type=number]");
+      if (select.value && quantidade.value) {
+        const preco = parseFloat(select.selectedOptions[0].dataset.preco);
+        const qty = parseInt(quantidade.value);
+        if (!isNaN(preco) && !isNaN(qty)) {
+          total += preco * qty;
+        }
+      }
+    });
+    totalPedidoSpan.textContent = total.toFixed(2);
+  }
+
+  adicionarItemBtn.addEventListener("click", adicionarItem);
+
+  // Adiciona o primeiro item automaticamente na página
+  adicionarItem();
+
+  // Enviar pedido
+  document.getElementById("pedidoForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
-    button.disabled = true;
-    button.textContent = "Enviando...";
-
+    const form = event.target;
     const nome = form.nome.value.trim();
     const idJogo = form.idJogo.value.trim();
-    const itemSelect = form.itemDesejado;
-    const selectedOption = itemSelect.options[itemSelect.selectedIndex];
-    const item = selectedOption.value;
-    const preco = selectedOption.getAttribute("data-preco");
     const pagamento = form.pagamento.value;
     const mensagem = form.mensagem.value.trim() || "Nenhuma";
 
-    const pedidoTexto = 
+    // Montar lista de itens e cálculo do total para exibir e enviar
+    const grupos = itensContainer.querySelectorAll(".item-group");
+    let itensPedidoTexto = "";
+    let total = 0;
+    grupos.forEach((grupo, index) => {
+      const select = grupo.querySelector("select");
+      const quantidade = grupo.querySelector("input[type=number]");
+      if (select.value && quantidade.value) {
+        const itemNome = select.value;
+        const preco = parseFloat(select.selectedOptions[0].dataset.preco);
+        const qty = parseInt(quantidade.value);
+        const subtotal = preco * qty;
+        total += subtotal;
+        itensPedidoTexto += `  • ${itemNome} x${qty} — R$${subtotal.toFixed(2)}\n`;
+      }
+    });
+
+    if (itensPedidoTexto === "") {
+      alert("Por favor, adicione pelo menos um item ao pedido.");
+      return;
+    }
+
+    const pedidoTexto =
       `✅ Pedido Recebido:\n` +
       `Nome: ${nome}\n` +
       `ID no Jogo: ${idJogo}\n` +
-      `Item: ${item}\n` +
+      `Itens:\n${itensPedidoTexto}` +
       `Pagamento: ${pagamento}\n` +
-      `Preço: R$${parseFloat(preco).toFixed(2)}\n` +
+      `Total: R$${total.toFixed(2)}\n` +
       `Mensagem: ${mensagem}`;
 
-    pedidoExibido.textContent = pedidoTexto;
+    document.getElementById("pedidoExibido").textContent = pedidoTexto;
 
-    try {
-      const res = await fetch(webhookUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          content:
-            `**📦 Novo Pedido Recebido!**\n` +
-            `👤 **Nome:** ${nome}\n` +
-            `🎮 **ID do jogo:** ${idJogo}\n` +
-            `🎁 **Item:** ${item}\n` +
-            `💳 **Pagamento:** ${pagamento}\n` +
-            `💰 **Preço:** R$${parseFloat(preco).toFixed(2)}\n` +
-            `📝 **Mensagem:** ${mensagem}`
-        })
-      });
-      if (!res.ok) throw new Error(`HTTP status ${res.status}`);
-    } catch (error) {
-      pedidoExibido.textContent += `\n\n⚠️ Erro ao enviar o pedido. Tente novamente.`;
-      console.error(error);
-    }
+    // Enviar pedido para Discord
+    fetch(webhookUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        content:
+          `**📦 Novo Pedido Recebido!**\n` +
+          `👤 **Nome:** ${nome}\n` +
+          `🎮 **ID do jogo:** ${idJogo}\n` +
+          `🎁 **Itens:**\n${itensPedidoTexto}` +
+          `💳 **Pagamento:** ${pagamento}\n` +
+          `💰 **Total:** R$${total.toFixed(2)}\n` +
+          `📝 **Mensagem:** ${mensagem}`
+      })
+    }).catch(console.error);
 
-    button.disabled = false;
-    button.textContent = "Enviar Pedido";
     form.reset();
+    itensContainer.innerHTML = "";
+    adicionarItem();
+    calcularTotal();
   });
 </script>
 
