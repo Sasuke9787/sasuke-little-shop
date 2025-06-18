@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sasuke Little Shop</title>
+</head>
+<body>
+  <form id="pedidoForm">
+    <input type="text" name="nome" placeholder="Nome" required>
+    <input type="text" name="idJogo" placeholder="ID do Jogo" required>
+    <input type="text" name="itemDesejado" placeholder="Item Desejado" required>
+    <select name="pagamento" required>
+      <option value="Pix">Pix</option>
+      <option value="PayPal">PayPal</option>
+    </select>
+    <textarea name="mensagem" placeholder="Mensagem adicional"></textarea>
+    <button type="submit">Enviar Pedido</button>
+  </form>
+  <div id="pedidoExibido"></div>
+
+  <script>
+    document.getElementById("pedidoForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const dados = {
+        nome: form.nome.value,
+        idJogo: form.idJogo.value,
+        item: form.itemDesejado.value,
+        pagamento: form.pagamento.value,
+        mensagem: form.mensagem.value || "Nenhuma"
+      };
+      const exibicao =
+        "✅ Pedido Recebido:\n" +
+        "Nome: " + dados.nome + "\n" +
+        "ID no Jogo: " + dados.idJogo + "\n" +
+        "Item: " + dados.item + "\n" +
+        "Pagamento: " + dados.pagamento + "\n" +
+        "Mensagem: " + dados.mensagem;
+      document.getElementById("pedidoExibido").textContent = exibicao;
+
+      const payload = {
+        content: "**📦 Novo Pedido Recebido!**\n" +
+                 "👤 **Nome:** " + dados.nome + "\n" +
+                 "🎮 **ID do jogo:** " + dados.idJogo + "\n" +
+                 "🎁 **Item:** " + dados.item + "\n" +
+                 "💳 **Pagamento:** " + dados.pagamento + "\n" +
+                 "📝 **Mensagem:** " + dados.mensagem
+      };
+
+      fetch("https://discord.com/api/webhooks/1384991383315808336/DDj7x3DrLUyv8Hl9dvAO0l6034tOGcRa0HmGrco-u5NQlCA4-52QWFFLZL5mC3xkv0P0", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      form.reset();
+    });
+  </script>
+</body>
+</html>
