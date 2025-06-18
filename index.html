@@ -1,340 +1,283 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sasuke Little Shop</title>
-  <style>
-    body {margin:0;font-family:'Segoe UI',sans-serif;background:#121212;color:#fff;}
-    header {background:#1f1f1f;padding:1rem;text-align:center;font-size:1.8rem;font-weight:bold;color:#00bcd4;}
-    .container {max-width:900px;margin:auto;padding:2rem;}
-    .item {background:#1e1e1e;padding:1rem;margin-bottom:1rem;border-radius:8px;box-shadow:0 0 10px #00000050;}
-    .item h3 {margin:0;color:#ffffff;}
-    .item p {margin:0.5rem 0;}
-    form {background:#1e1e1e;padding:1rem;border-radius:8px;margin-top:2rem;}
-    input, select, textarea {width:100%;margin:0.5rem 0;padding:0.5rem;border-radius:5px;border:none;background:#2c2c2c;color:white;}
-    button {background:#00bcd4;color:#121212;border:none;padding:0.5rem 1rem;border-radius:5px;cursor:pointer;}
-    button:hover {background:#0097a7;}
-    footer {margin-top:2rem;background:#1f1f1f;text-align:center;padding:1rem;font-size:0.9rem;color:#cccccc;}
-    .pedido-exibido {margin-top:2rem;background:#1a1a1a;padding:1rem;border-radius:8px;white-space:pre-wrap;}
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sasuke Little Shop</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+  body {
+    margin: 0; padding: 2rem 1rem;
+    font-family: 'Montserrat', Arial, sans-serif;
+    background: #121212;
+    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+  }
+  header {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 2rem;
+    color: #00bcd4;
+    text-shadow: 0 0 6px #00bcd4;
+  }
+  form {
+    background: #1e1e1e;
+    border-radius: 12px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 520px;
+    box-shadow: 0 4px 12px rgba(0,188,212,0.4);
+    display: flex;
+    flex-direction: column;
+  }
+  label {
+    font-weight: 700;
+    margin-top: 1.3rem;
+    color: #80deea;
+  }
+  input, select, textarea, button {
+    margin-top: 0.4rem;
+    border-radius: 8px;
+    border: none;
+    background: #2b2b2b;
+    color: #eee;
+    font-size: 1.1rem;
+    padding: 0.65rem 1rem;
+    box-sizing: border-box;
+    transition: background 0.25s ease;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    background: #004d40;
+    box-shadow: 0 0 5px #00bcd4;
+    color: #a7ffeb;
+  }
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  button {
+    margin-top: 2rem;
+    background: #00bcd4;
+    font-weight: 900;
+    cursor: pointer;
+    color: #000;
+    font-size: 1.3rem;
+    letter-spacing: 0.05em;
+    box-shadow: 0 5px 15px #00bcd4aa;
+    transition: background 0.3s ease;
+  }
+  button:hover:not(:disabled) {
+    background: #0097a7;
+    box-shadow: 0 8px 20px #0097a7cc;
+  }
+  button:disabled {
+    background: #555;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+  #pedidoExibido {
+    max-width: 520px;
+    background: #212121;
+    color: #00e676;
+    white-space: pre-wrap;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin: 2rem auto 0 auto;
+    font-family: 'Courier New', Courier, monospace;
+    min-height: 7rem;
+    box-shadow: 0 0 10px #00e676aa;
+    user-select: text;
+  }
+  footer {
+    margin-top: auto;
+    padding: 1.3rem 1rem;
+    font-size: 0.95rem;
+    text-align: center;
+    color: #999;
+    max-width: 520px;
+  }
+  optgroup {
+    color: #00bcd4;
+    font-weight: 700;
+  }
+</style>
 </head>
 <body>
-  <header>Sasuke Little Shop</header>
-  <div class="container">
-    <h1>Lista de Itens à Venda</h1>
-    <h2 style='color:#00bcd4'>Itens Raros</h2>
-<div class="item">
-            <h3>Valkyria Rara</h3>
-            <p><strong>Preço:</strong> R$599,99</p>
-        </div>
-<div class="item">
-            <h3>GZ</h3>
-            <p><strong>Preço:</strong> R$324,99</p>
-        </div>
-<div class="item">
-            <h3>Frost RR</h3>
-            <p><strong>Preço:</strong> R$199,99</p>
-        </div>
-<div class="item">
-            <h3>Gula RR</h3>
-            <p><strong>Preço:</strong> R$164,99</p>
-        </div>
-<div class="item">
-            <h3>Hermes RR</h3>
-            <p><strong>Preço:</strong> R$189,99</p>
-        </div>
-<div class="item">
-            <h3>Lança RR</h3>
-            <p><strong>Preço:</strong> R$129,99</p>
-        </div>
-<div class="item">
-            <h3>Hades RR</h3>
-            <p><strong>Preço:</strong> R$129,99</p>
-        </div>
-<div class="item">
-            <h3>Hephaestus RR</h3>
-            <p><strong>Preço:</strong> R$114,99</p>
-        </div>
-<div class="item">
-            <h3>Helheim RR</h3>
-            <p><strong>Preço:</strong> R$114,99</p>
-        </div>
-<div class="item">
-            <h3>Fenrir RR</h3>
-            <p><strong>Preço:</strong> R$99,99</p>
-        </div>
-<h2 style='color:#00bcd4'>Títulos</h2>
-<div class="item">
-            <h3>Título Helheim</h3>
-            <p><strong>Preço:</strong> R$199,99</p>
-        </div>
-<div class="item">
-            <h3>Título Frost</h3>
-            <p><strong>Preço:</strong> R$94,99</p>
-        </div>
-<div class="item">
-            <h3>Título Fenrir</h3>
-            <p><strong>Preço:</strong> R$84,99</p>
-        </div>
-<div class="item">
-            <h3>Título Zeus</h3>
-            <p><strong>Preço:</strong> R$32,49</p>
-        </div>
-<h2 style='color:#00bcd4'>Full Sets</h2>
-<div class="item">
-            <h3>Full FENRIR 4/4</h3>
-            <p><strong>Preço:</strong> R$34,99</p>
-        </div>
-<div class="item">
-            <h3>Full FENRIR 5/5</h3>
-            <p><strong>Preço:</strong> R$49,99</p>
-        </div>
-<div class="item">
-            <h3>Full Hermes 4/5</h3>
-            <p><strong>Preço:</strong> R$44,99</p>
-        </div>
-<div class="item">
-            <h3>Full Hermes 5/5</h3>
-            <p><strong>Preço:</strong> R$59,99</p>
-        </div>
-<div class="item">
-            <h3>Full Ares 4/4 (ótimos UP)</h3>
-            <p><strong>Preço:</strong> R$34,99</p>
-        </div>
-<div class="item">
-            <h3>Full Ares 5/5</h3>
-            <p><strong>Preço:</strong> R$49,99</p>
-        </div>
-<div class="item">
-            <h3>Full Permafrost 4/4</h3>
-            <p><strong>Preço:</strong> R$29,99</p>
-        </div>
-<div class="item">
-            <h3>Full Permafrost 5/5</h3>
-            <p><strong>Preço:</strong> R$39,99</p>
-        </div>
-<div class="item">
-            <h3>Full Jormugandr 4/4</h3>
-            <p><strong>Preço:</strong> R$24,99</p>
-        </div>
-<div class="item">
-            <h3>Full Jormugandr 5/5</h3>
-            <p><strong>Preço:</strong> R$37,49</p>
-        </div>
-<div class="item">
-            <h3>Full Pós 4/4</h3>
-            <p><strong>Preço:</strong> R$24,99</p>
-        </div>
-<div class="item">
-            <h3>Full Pós 5/5</h3>
-            <p><strong>Preço:</strong> R$37,49</p>
-        </div>
-<div class="item">
-            <h3>Full Zeus 4/4</h3>
-            <p><strong>Preço:</strong> R$19,99</p>
-        </div>
-<div class="item">
-            <h3>Full Zeus 5/5</h3>
-            <p><strong>Preço:</strong> R$29,99</p>
-        </div>
-<div class="item">
-            <h3>Full Thor 4/4</h3>
-            <p><strong>Preço:</strong> R$19,99</p>
-        </div>
-<div class="item">
-            <h3>Full Thor 5/5</h3>
-            <p><strong>Preço:</strong> R$29,99</p>
-        </div>
-<div class="item">
-            <h3>Full Apollo 4/4</h3>
-            <p><strong>Preço:</strong> R$19,99</p>
-        </div>
-<div class="item">
-            <h3>Full Apollo 5/5</h3>
-            <p><strong>Preço:</strong> R$29,99</p>
-        </div>
-<h2 style='color:#00bcd4'>Armas e Equipamentos</h2>
-<div class="item">
-            <h3>Espada Valkyria</h3>
-            <p><strong>Preço:</strong> R$69,99</p>
-        </div>
-<div class="item">
-            <h3>Mjolnir</h3>
-            <p><strong>Preço:</strong> R$44,99</p>
-        </div>
-<div class="item">
-            <h3>BZ</h3>
-            <p><strong>Preço:</strong> R$27,49</p>
-        </div>
-<div class="item">
-            <h3>Espada Apollo</h3>
-            <p><strong>Preço:</strong> R$29,99</p>
-        </div>
-<div class="item">
-            <h3>Espada Permafrost</h3>
-            <p><strong>Preço:</strong> R$25,99</p>
-        </div>
-<div class="item">
-            <h3>Espada Hermes</h3>
-            <p><strong>Preço:</strong> R$24,99</p>
-        </div>
-<div class="item">
-            <h3>Espada Gula</h3>
-            <p><strong>Preço:</strong> R$24,99</p>
-        </div>
-<div class="item">
-            <h3>Espada Orgulho</h3>
-            <p><strong>Preço:</strong> R$24,99</p>
-        </div>
-<div class="item">
-            <h3>Espada Jormugandr</h3>
-            <p><strong>Preço:</strong> R$21,99</p>
-        </div>
-<div class="item">
-            <h3>Espada Helheim</h3>
-            <p><strong>Preço:</strong> R$21,99</p>
-        </div>
-<div class="item">
-            <h3>Espada Hades</h3>
-            <p><strong>Preço:</strong> R$20,99</p>
-        </div>
-<div class="item">
-            <h3>Lança Ares</h3>
-            <p><strong>Preço:</strong> R$20,99</p>
-        </div>
-<div class="item">
-            <h3>Espada Fenrir</h3>
-            <p><strong>Preço:</strong> R$17,99</p>
-        </div>
-<div class="item">
-            <h3>Tridente não selado</h3>
-            <p><strong>Preço:</strong> R$17,99</p>
-        </div>
-<div class="item">
-            <h3>Tridente antigo</h3>
-            <p><strong>Preço:</strong> R$9,99</p>
-        </div>
-<h2 style='color:#00bcd4'>Freya e Foices</h2>
-<div class="item">
-            <h3>Freya Antiga</h3>
-            <p><strong>Preço:</strong> R$12,99</p>
-        </div>
-<div class="item">
-            <h3>Freya Oceano</h3>
-            <p><strong>Preço:</strong> R$8,99</p>
-        </div>
-<div class="item">
-            <h3>Freya Natal</h3>
-            <p><strong>Preço:</strong> R$9,99</p>
-        </div>
-<div class="item">
-            <h3>Foice Azul</h3>
-            <p><strong>Preço:</strong> R$9,99</p>
-        </div>
-<div class="item">
-            <h3>Foice</h3>
-            <p><strong>Preço:</strong> R$8,99</p>
-        </div>
-<h2 style='color:#00bcd4'>Mvps baratos e clássicos</h2>
-<div class="item">
-            <h3>GAT FC</h3>
-            <p><strong>Preço:</strong> R$9,99</p>
-        </div>
-<div class="item">
-            <h3>GAT Sombra</h3>
-            <p><strong>Preço:</strong> R$9,99</p>
-        </div>
-<div class="item">
-            <h3>GAT Gold</h3>
-            <p><strong>Preço:</strong> R$6,99</p>
-        </div>
-<div class="item">
-            <h3>GAT 2020</h3>
-            <p><strong>Preço:</strong> R$6,99</p>
-        </div>
-<div class="item">
-            <h3>Cross</h3>
-            <p><strong>Preço:</strong> R$5,99</p>
-        </div>
-<h2 style='color:#00bcd4'>Escudos</h2>
-<div class="item">
-            <h3>Escudo S11</h3>
-            <p><strong>Preço:</strong> R$3,49</p>
-        </div>
-<div class="item">
-            <h3>Escudo Oceano</h3>
-            <p><strong>Preço:</strong> R$2,99</p>
-        </div>
-<div class="item">
-            <h3>Escudo Ares</h3>
-            <p><strong>Preço:</strong> R$2,99</p>
-        </div>
-<div class="item">
-            <h3>Escudo S2</h3>
-            <p><strong>Preço:</strong> R$2,75</p>
-        </div>
-<div class="item">
-            <h3>BB</h3>
-            <p><strong>Preço:</strong> R$2,75</p>
-        </div>
-<div class="item">
-            <h3>DW</h3>
-            <p><strong>Preço:</strong> R$2,49</p>
-        </div>
-<h2 style='color:#00bcd4'>Coins</h2>
-<div class="item">
-            <h3>Coins</h3>
-            <p><strong>Preço:</strong> 10m a cada R$1,00</p>
-        </div>
 
+<header>Sasuke Little Shop</header>
 
-    <h2 style="color:#00bcd4">Fazer Pedido</h2>
-    <form id="pedidoForm">
-      <label>Seu Nome:</label>
-      <input type="text" name="nome" required>
-      <label>ID no Jogo (Blockman Go):</label>
-      <input type="text" name="idJogo" required>
-      <label>Item Desejado:</label>
-      <input type="text" name="itemDesejado" placeholder="Ex: Valkyria Rara" required>
-      <label>Forma de Pagamento:</label>
-      <select name="pagamento" required>
-        <option value="">Selecione</option>
-        <option value="Pix">Pix</option>
-        <option value="PayPal">PayPal</option>
-      </select>
-      <label>Mensagem adicional (opcional):</label>
-      <textarea name="mensagem" rows="3"></textarea>
-      <button type="submit">Enviar Pedido</button>
-    </form>
-    <div id="pedidoExibido" class="pedido-exibido"></div>
-  </div>
-  <footer>
-    A entrega dos itens é feita <strong>somente após o pagamento</strong>.<br>
-    Para concluir o pedido, envie um pedido de amizade no Discord: <strong>sasuke9787</strong>
-  </footer>
-  <script>
-    document.getElementById("pedidoForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const form = e.target;
-      const dados = {
-        nome: form.nome.value,
-        idJogo: form.idJogo.value,
-        item: form.itemDesejado.value,
-        pagamento: form.pagamento.value,
-        mensagem: form.mensagem.value
-      };
-      const exibicao =
-        "✅ Pedido Recebido:\n" +
-        "Nome: " + dados.nome + "\n" +
-        "ID no Jogo: " + dados.idJogo + "\n" +
-        "Item: " + dados.item + "\n" +
-        "Pagamento: " + dados.pagamento + "\n" +
-        "Mensagem: " + (dados.mensagem || "Nenhuma");
-      document.getElementById("pedidoExibido").textContent = exibicao;
-      form.reset();
-    });
-  </script>
+<form id="pedidoForm" autocomplete="off">
+  <label for="nome">Seu Nome:</label>
+  <input type="text" id="nome" name="nome" required autocomplete="off" />
+
+  <label for="idJogo">ID no Jogo:</label>
+  <input type="text" id="idJogo" name="idJogo" required autocomplete="off" />
+
+  <label for="itemDesejado">Item Desejado:</label>
+  <select id="itemSelect" name="itemDesejado" required>
+    <option value="" disabled selected>Selecione um item</option>
+
+    <optgroup label="Raras">
+      <option value="Valkyria Rara" data-preco="599.99">Valkyria Rara — R$599,99</option>
+      <option value="GZ" data-preco="324.99">GZ — R$324,99</option>
+      <option value="Frost RR" data-preco="199.99">Frost RR — R$199,99</option>
+      <option value="Gula RR" data-preco="164.99">Gula RR — R$164,99</option>
+      <option value="Hermes RR" data-preco="189.99">Hermes RR — R$189,99</option>
+      <option value="Lança RR" data-preco="129.99">Lança RR — R$129,99</option>
+      <option value="Hades RR" data-preco="129.99">Hades RR — R$129,99</option>
+      <option value="Hephaestus RR" data-preco="114.99">Hephaestus RR — R$114,99</option>
+      <option value="Helheim RR" data-preco="114.99">Helheim RR — R$114,99</option>
+      <option value="Fenrir RR" data-preco="99.99">Fenrir RR — R$99,99</option>
+      <option value="Título Helheim" data-preco="199.99">Título Helheim — R$199,99</option>
+      <option value="Título Frost" data-preco="94.99">Título Frost — R$94,99</option>
+      <option value="Título Fenrir" data-preco="84.99">Título Fenrir — R$84,99</option>
+      <option value="Título Zeus" data-preco="32.49">Título Zeus — R$32,49</option>
+    </optgroup>
+
+    <optgroup label="Full Sets">
+      <option value="Full FENRIR 4/4" data-preco="34.99">Full FENRIR 4/4 — R$34,99</option>
+      <option value="Full FENRIR 5/5" data-preco="49.99">Full FENRIR 5/5 — R$49,99</option>
+      <option value="Full Hermes 4/5" data-preco="44.99">Full Hermes 4/5 — R$44,99</option>
+      <option value="Full Hermes 5/5" data-preco="59.99">Full Hermes 5/5 — R$59,99</option>
+      <option value="Full Ares 4/4" data-preco="34.99">Full Ares 4/4 — R$34,99</option>
+      <option value="Full Ares 5/5" data-preco="49.99">Full Ares 5/5 — R$49,99</option>
+      <option value="Full Permafrost 4/4" data-preco="29.99">Full Permafrost 4/4 — R$29,99</option>
+      <option value="Full Permafrost 5/5" data-preco="39.99">Full Permafrost 5/5 — R$39,99</option>
+      <option value="Full Jormugandr 5/5" data-preco="37.49">Full Jormugandr 5/5 — R$37,49</option>
+      <option value="Full Jormugandr 4/4" data-preco="24.99">Full Jormugandr 4/4 — R$24,99</option>
+      <option value="Full Pós 5/5" data-preco="37.49">Full Pós 5/5 — R$37,49</option>
+      <option value="Full Pós 4/4" data-preco="24.99">Full Pós 4/4 — R$24,99</option>
+      <option value="Full Zeus 4/4" data-preco="19.99">Full Zeus 4/4 — R$19,99</option>
+      <option value="Full Zeus 5/5" data-preco="29.99">Full Zeus 5/5 — R$29,99</option>
+      <option value="Full Thor 5/5" data-preco="29.99">Full Thor 5/5 — R$29,99</option>
+      <option value="Full Thor 4/4" data-preco="19.99">Full Thor 4/4 — R$19,99</option>
+      <option value="Full Apollo 5/5" data-preco="29.99">Full Apollo 5/5 — R$29,99</option>
+      <option value="Full Apollo 4/4" data-preco="19.99">Full Apollo 4/4 — R$19,99</option>
+    </optgroup>
+
+    <optgroup label="Espadas e Armas">
+      <option value="Espada Valkyria" data-preco="69.99">Espada Valkyria — R$69,99</option>
+      <option value="Mjolnir" data-preco="44.99">Mjolnir — R$44,99</option>
+      <option value="BZ" data-preco="27.49">BZ — R$27,49</option>
+      <option value="Espada Apollo" data-preco="29.99">Espada Apollo — R$29,99</option>
+      <option value="Espada Permafrost" data-preco="25.99">Espada Permafrost — R$25,99</option>
+      <option value="Espada Hermes" data-preco="24.99">Espada Hermes — R$24,99</option>
+      <option value="Espada Gula" data-preco="24.99">Espada Gula — R$24,99</option>
+      <option value="Espada Orgulho" data-preco="24.99">Espada Orgulho — R$24,99</option>
+      <option value="Espada Jormugandr" data-preco="21.99">Espada Jormugandr — R$21,99</option>
+      <option value="Espada Helheim" data-preco="21.99">Espada Helheim — R$21,99</option>
+      <option value="Espada Hades" data-preco="20.99">Espada Hades — R$20,99</option>
+      <option value="Lança Ares" data-preco="20.99">Lança Ares — R$20,99</option>
+      <option value="Espada Fenrir" data-preco="17.99">Espada Fenrir — R$17,99</option>
+      <option value="Tridente Não Selado" data-preco="17.99">Tridente Não Selado — R$17,99</option>
+      <option value="Tridente Antigo" data-preco="9.99">Tridente Antigo — R$9,99</option>
+    </optgroup>
+
+    <optgroup label="Mvps baratos e clássicos">
+      <option value="Freya Antiga" data-preco="12.99">Freya Antiga — R$12,99</option>
+      <option value="Freya Oceano" data-preco="8.99">Freya Oceano — R$8,99</option>
+      <option value="Freya Natal" data-preco="9.99">Freya Natal — R$9,99</option>
+      <option value="Foice Azul" data-preco="9.99">Foice Azul — R$9,99</option>
+      <option value="Foice" data-preco="8.99">Foice — R$8,99</option>
+      <option value="GAT FC" data-preco="9.99">GAT FC — R$9,99</option>
+      <option value="GAT Sombra" data-preco="9.99">GAT Sombra — R$9,99</option>
+      <option value="GAT Gold" data-preco="6.99">GAT Gold — R$6,99</option>
+      <option value="GAT 2020" data-preco="6.99">GAT 2020 — R$6,99</option>
+      <option value="Cross" data-preco="5.99">Cross — R$5,99</option>
+      <option value="Escudo S11" data-preco="3.49">Escudo S11 — R$3,49</option>
+      <option value="Escudo Oceano" data-preco="2.99">Escudo Oceano — R$2,99</option>
+      <option value="Escudo Ares" data-preco="2.99">Escudo Ares — R$2,99</option>
+      <option value="Escudo S2" data-preco="2.75">Escudo S2 — R$2,75</option>
+      <option value="BB" data-preco="2.75">BB — R$2,75</option>
+      <option value="DW" data-preco="2.49">DW — R$2,49</option>
+    </optgroup>
+
+    <optgroup label="Coins">
+      <option value="Coins - 10m" data-preco="1.00">Coins - 10m — R$1,00</option>
+    </optgroup>
+  </select>
+
+  <label for="pagamento">Forma de Pagamento:</label>
+  <select id="pagamento" name="pagamento" required>
+    <option value="Pix">Pix</option>
+    <option value="PayPal">PayPal</option>
+  </select>
+
+  <label for="mensagem">Mensagem adicional (opcional):</label>
+  <textarea id="mensagem" name="mensagem" rows="3" placeholder="Ex: Meu ID no jogo é 123456"></textarea>
+
+  <button type="submit">Enviar Pedido</button>
+</form>
+
+<div id="pedidoExibido" aria-live="polite"></div>
+
+<footer>
+  Entrega só é feita após confirmação do pagamento.<br />
+  Contato via Discord: adicione <strong>sasuke9787</strong> para finalizar seu pedido.
+</footer>
+
+<script>
+  const webhookUrl = "https://discord.com/api/webhooks/1384991383315808336/DDj7x3DrLUyv8Hl9dvAO0l6034tOGcRa0HmGrco-u5NQlCA4-52QWFFLZL5mC3xkv0P0";
+  const form = document.getElementById("pedidoForm");
+  const button = form.querySelector("button");
+  const pedidoExibido = document.getElementById("pedidoExibido");
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    button.disabled = true;
+    button.textContent = "Enviando...";
+
+    const nome = form.nome.value.trim();
+    const idJogo = form.idJogo.value.trim();
+    const itemSelect = form.itemDesejado;
+    const selectedOption = itemSelect.options[itemSelect.selectedIndex];
+    const item = selectedOption.value;
+    const preco = selectedOption.getAttribute("data-preco");
+    const pagamento = form.pagamento.value;
+    const mensagem = form.mensagem.value.trim() || "Nenhuma";
+
+    const pedidoTexto = 
+      `✅ Pedido Recebido:\n` +
+      `Nome: ${nome}\n` +
+      `ID no Jogo: ${idJogo}\n` +
+      `Item: ${item}\n` +
+      `Pagamento: ${pagamento}\n` +
+      `Preço: R$${parseFloat(preco).toFixed(2)}\n` +
+      `Mensagem: ${mensagem}`;
+
+    pedidoExibido.textContent = pedidoTexto;
+
+    try {
+      const res = await fetch(webhookUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          content:
+            `**📦 Novo Pedido Recebido!**\n` +
+            `👤 **Nome:** ${nome}\n` +
+            `🎮 **ID do jogo:** ${idJogo}\n` +
+            `🎁 **Item:** ${item}\n` +
+            `💳 **Pagamento:** ${pagamento}\n` +
+            `💰 **Preço:** R$${parseFloat(preco).toFixed(2)}\n` +
+            `📝 **Mensagem:** ${mensagem}`
+        })
+      });
+      if (!res.ok) throw new Error(`HTTP status ${res.status}`);
+    } catch (error) {
+      pedidoExibido.textContent += `\n\n⚠️ Erro ao enviar o pedido. Tente novamente.`;
+      console.error(error);
+    }
+
+    button.disabled = false;
+    button.textContent = "Enviar Pedido";
+    form.reset();
+  });
+</script>
+
 </body>
 </html>
